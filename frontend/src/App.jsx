@@ -1,7 +1,7 @@
 import React from 'react';
 import Dashboard from './components/Dashboard';
 import ReferralForm from './components/ReferralForm';
-import './index.css'; // Tailwind setup
+import './index.css'; 
 
 function App() {
   return (
