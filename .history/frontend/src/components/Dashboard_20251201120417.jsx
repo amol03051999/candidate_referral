@@ -116,7 +116,7 @@ const Dashboard = () => {
                 }}
                 className="text-red-600 hover:text-red-800 text-sm"
               >
-                Delete 
+                Delete A
               </button>
             </div>
           </div>

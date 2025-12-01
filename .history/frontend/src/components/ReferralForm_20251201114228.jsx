@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import { API_BASE } from "../api";
+
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import axios from 'axios';
+import { API_BASE } from '../api';
 
 const ReferralForm = () => {
   const {
@@ -11,32 +12,32 @@ const ReferralForm = () => {
     formState: { errors },
   } = useForm();
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState("");
+  const [success, setSuccess] = useState('');
 
   const onSubmit = async (data) => {
     setLoading(true);
-    setSuccess("");
+    setSuccess('');
     try {
       const formData = new FormData();
-      formData.append("name", data.name);
-      formData.append("email", data.email);
-      formData.append("phone", data.phone);
-      formData.append("jobTitle", data.jobTitle);
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('phone', data.phone);
+      formData.append('jobTitle', data.jobTitle);
       if (data.resume && data.resume[0]) {
-        formData.append("resume", data.resume[0]);
+        formData.append('resume', data.resume[0]);
       }
 
       await axios.post(`${API_BASE}/candidates`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: { 'Content-Type': 'multipart/form-data' },
       });
 
       reset();
-      setSuccess("✅ Candidate referred successfully!");
-      setTimeout(() => setSuccess(""), 3000);
+      setSuccess('✅ Candidate referred successfully!');
+      setTimeout(() => setSuccess(''), 3000);
     } catch (error) {
       const errorMsg = error.response?.data?.errors
         ? error.response.data.errors[0]?.msg
-        : error.response?.data?.error || "Error submitting form";
+        : error.response?.data?.error || 'Error submitting form';
       alert(errorMsg);
       console.error(error);
     } finally {
@@ -60,7 +61,7 @@ const ReferralForm = () => {
       <div className="space-y-4">
         <div>
           <input
-            {...register("name", { required: "Name required", minLength: 2 })}
+            {...register('name', { required: 'Name required', minLength: 2 })}
             placeholder="Candidate Name"
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
@@ -71,11 +72,11 @@ const ReferralForm = () => {
 
         <div>
           <input
-            {...register("email", {
-              required: "Email required",
+            {...register('email', {
+              required: 'Email required',
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/,
-                message: "Invalid email format",
+                message: 'Invalid email format',
               },
             })}
             placeholder="john@example.com"
@@ -88,12 +89,12 @@ const ReferralForm = () => {
 
         <div>
           <input
-            {...register("phone", {
-              required: "Phone required",
-              minLength: { value: 10, message: "Phone must be 10+ digits" },
+            {...register('phone', {
+              required: 'Phone required',
+              minLength: { value: 10, message: 'Phone must be 10+ digits' },
               pattern: {
                 value: /^[0-9+-s]+$/,
-                message: "Invalid phone format",
+                message: 'Invalid phone format',
               },
             })}
             placeholder="Phone Number"
@@ -106,7 +107,7 @@ const ReferralForm = () => {
 
         <div>
           <input
-            {...register("jobTitle", { required: "Job title required" })}
+            {...register('jobTitle', { required: 'Job title required' })}
             placeholder="Job Title"
             className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           />
@@ -118,8 +119,10 @@ const ReferralForm = () => {
         </div>
 
         <div>
-          <input
-            {...register("resume")}
+
+Amol Shinde, [01-12-2025 11:38]
+<input
+            {...register('resume')}
             type="file"
             accept=".pdf"
             className="w-full p-3 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
@@ -157,7 +160,7 @@ const ReferralForm = () => {
               Submitting...
             </span>
           ) : (
-            "Refer Candidate"
+            'Refer Candidate'
           )}
         </button>
       </div>

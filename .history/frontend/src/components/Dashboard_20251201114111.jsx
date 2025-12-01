@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { API_BASE } from "../api";
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { API_BASE } from '../api';
 
 const Dashboard = () => {
   const [candidates, setCandidates] = useState([]);
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -16,7 +17,7 @@ const Dashboard = () => {
       const res = await axios.get(`${API_BASE}/candidates`);
       setCandidates(res.data);
     } catch (error) {
-      console.error("Error fetching candidates", error);
+      console.error('Error fetching candidates', error);
     } finally {
       setLoading(false);
     }
@@ -24,30 +25,26 @@ const Dashboard = () => {
 
   const updateStatus = async (id, status) => {
     try {
-      const res = await axios.put(`${API_BASE}/candidates/${id}/status`, {
-        status,
-      });
-      setCandidates(candidates.map((c) => (c._id === id ? res.data : c)));
+      const res = await axios.put(`${API_BASE}/candidates/${id}/status`, { status });
+      setCandidates(candidates.map(c => (c._id === id ? res.data : c)));
     } catch (error) {
-      alert("Error updating status");
+      alert('Error updating status');
       console.error(error);
     }
   };
 
-  const filteredCandidates = candidates.filter(
-    (c) =>
-      c.jobTitle.toLowerCase().includes(search.toLowerCase()) ||
-      c.status.toLowerCase().includes(search.toLowerCase())
+  const filteredCandidates = candidates.filter((c) =>
+    c.jobTitle.toLowerCase().includes(search.toLowerCase()) ||
+    c.status.toLowerCase().includes(search.toLowerCase())
   );
 
   const statusColors = {
-    Pending: "bg-yellow-100 text-yellow-800",
-    Reviewed: "bg-blue-100 text-blue-800",
-    Hired: "bg-green-100 text-green-800",
+    Pending: 'bg-yellow-100 text-yellow-800',
+    Reviewed: 'bg-blue-100 text-blue-800',
+    Hired: 'bg-green-100 text-green-800',
   };
 
-  if (loading)
-    return <div className="text-center py-12">Loading candidates...</div>;
+  if (loading) return <div className="text-center py-12">Loading candidates...</div>;
 
   return (
     <div className="bg-white p-8 rounded-xl shadow-lg">
@@ -63,18 +60,11 @@ const Dashboard = () => {
 
       <div className="grid gap-4">
         {filteredCandidates.map((candidate) => (
-          <div
-            key={candidate._id}
-            className="border rounded-lg p-6 hover:shadow-md"
-          >
+          <div key={candidate._id} className="border rounded-lg p-6 hover:shadow-md">
             <div className="flex justify-between items-start mb-2">
-              <h3 className="text-xl font-bold text-gray-900">
-                {candidate.name}
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900">{candidate.name}</h3>
               <span
-                className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  statusColors[candidate.status]
-                }`}
+                className={`px-3 py-1 rounded-full text-sm font-medium ${statusColors[candidate.status]}`}
               >
                 {candidate.status}
               </span>
@@ -90,7 +80,7 @@ const Dashboard = () => {
             </p>
             {candidate.resumeUrl && (
               <a
-                href={`${API_BASE.replace("/api", "")}${candidate.resumeUrl}`}
+                href={`${API_BASE.replace('/api', '')}${candidate.resumeUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline text-sm"
@@ -110,21 +100,23 @@ const Dashboard = () => {
               </select>
               <button
                 onClick={() => {
-                  if (window.confirm("Delete candidate?")) {
+                  if (window.confirm('Delete candidate?')) {
                     // TODO: call DELETE API here
                   }
                 }}
                 className="text-red-600 hover:text-red-800 text-sm"
               >
-                Delete 
-              </button>
+                Delete
+
+Amol Shinde, [01-12-2025 11:38]
+</button>
             </div>
           </div>
         ))}
       </div>
       {filteredCandidates.length === 0 && (
         <p className="text-center text-gray-500 py-12">
-          {search ? "No matching candidates" : "No candidates yet"}
+          {search ? 'No matching candidates' : 'No candidates yet'}
         </p>
       )}
     </div>

@@ -116,7 +116,7 @@ const Dashboard = () => {
                 }}
                 className="text-red-600 hover:text-red-800 text-sm"
               >
-                Delete 
+                Delete Amol Shinde, [01-12-2025 11:38]
               </button>
             </div>
           </div>
